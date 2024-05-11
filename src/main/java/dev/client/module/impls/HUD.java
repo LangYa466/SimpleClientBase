@@ -3,12 +3,14 @@ package dev.client.module.impls;
 import com.cubk.event.annotations.EventTarget;
 import dev.client.Client;
 import dev.client.event.impls.render.EventRender2D;
-import dev.client.font.CFontRenderer;
-import dev.client.font.FontManager;
 import dev.client.module.Category;
 import dev.client.module.Module;
+import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * @author LangYa466
@@ -30,16 +32,11 @@ public class HUD extends Module {
         for (Module m : Client.moduleManager.getModules()) {
             if (m.isState()) enabledModules.add(m);
         }
-        CFontRenderer font = FontManager.sfui18;
-        enabledModules.sort((m1, m2) -> {
-            int width1 = FontManager.sfui18.getStringWidth(m1.getName());
-            int width2 = FontManager.sfui18.getStringWidth(m2.getName());
-            return Float.compare(width1, width2);
-        });
+        FontRenderer font = mc.fontRendererObj;
         for (Module module : enabledModules) {
             int moduleWidth = font.getStringWidth(module.getName());
             font.drawStringWithShadow(module.getName(), width - moduleWidth - 4, y, -1);
-            y += font.getFontHeight() + 3;
+            y += font.FONT_HEIGHT + 3;
         }
     }
 

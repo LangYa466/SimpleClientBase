@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 public class Client {
 
-    public static String name = "Mood";
+    public static String name = "SimpleClientBase";
 
     public static Logger logger =  LogManager.getLogger(name);
 
